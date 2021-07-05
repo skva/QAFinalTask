@@ -1,7 +1,9 @@
 import java.time.*;
+import java.time.temporal.ChronoUnit;
+import java.util.Calendar;
 import java.util.Scanner;
 public class Main {
-    public static void main (String[] agrs){
+    public static void main(String[] agrs) {
         //Date from console
         Scanner scDay = new Scanner(System.in);
         System.out.println("Введите число:");
@@ -20,11 +22,48 @@ public class Main {
 
         //Student date
         StudentData st = new StudentData("Ivanov Ivan", "Java Developer",
-                LocalDateTime.of(2020, Month.JUNE, 1, 15, 0), 56);
+                LocalDateTime.of(2020, Month.JUNE, 1, 10, 0), 56);
         System.out.println(st.getDate());
 
-        //difference between dates
-        Duration diff = Duration.between(LocalDateTime.from(fromConsole), LocalDateTime.from(st.getDate()));
+        //Difference between dates
+        Duration diff = Duration.between(LocalDateTime.from(st.getDate()), LocalDateTime.from(fromConsole));
         System.out.println(diff.getSeconds() / 3600);
+
+        System.out.println(fromConsole.getDayOfWeek());
+        System.out.println(st.getDate().getDayOfWeek());
+
+
+        //Loop days difference between
+        int numberOfDays = 0;
+        LocalDateTime date1 = st.getDate();
+        LocalDateTime date2 = fromConsole;
+        while (date1.isBefore(date2)) {
+            if (date1.getDayOfWeek() != (DayOfWeek.SATURDAY)
+                    && (date1.getDayOfWeek() != (DayOfWeek.SUNDAY))) {
+                numberOfDays++;
+            }
+            date1 = date1.plus(1, ChronoUnit.DAYS);
+            System.out.println(date1);
+        }
+        System.out.println(numberOfDays);
+
+        //Loop addhours difference between
+        int numberOfHours = 0;
+        LocalDateTime dateH1 = st.getDate();
+        LocalDateTime dateH2 = fromConsole;
+        if ((dateH2.getDayOfWeek() != DayOfWeek.SATURDAY) && (dateH2.getDayOfWeek() != DayOfWeek.SUNDAY)
+                && (dateH2.getHour() < 18)) {
+            while (dateH1.getHour() < dateH2.getHour()) {
+                numberOfHours++;
+                dateH2 = dateH2.minus(1, ChronoUnit.HOURS);
+            }
+        }
+        if (dateH2.getHour() > 18) {
+            numberOfHours = 8;
+        }
+        if ((dateH2.getDayOfWeek() == DayOfWeek.SATURDAY) || (dateH2.getDayOfWeek() == DayOfWeek.SUNDAY)) {
+            numberOfHours = 0;
+        }
+        System.out.println(numberOfHours);
     }
 }

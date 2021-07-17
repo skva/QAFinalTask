@@ -32,11 +32,12 @@ public class ReportGenerator {
     }
     //Hours difference in last day
     private int getHoursDiff(StudentData students, LocalDateTime dateTime) {
-        LocalDateTime date1 = students.getDate();
+        LocalDateTime date
+                = students.getDate();
         int numberOfHours = 0;
         if (dateTime.getDayOfWeek() != DayOfWeek.SATURDAY && dateTime.getDayOfWeek() != DayOfWeek.SUNDAY
                 && dateTime.getHour() < 18) {
-            while (date1.getHour() < dateTime.getHour()) {
+            while (date.getHour() < dateTime.getHour()) {
                 numberOfHours++;
                 dateTime = dateTime.minus(1, ChronoUnit.HOURS);
             }
@@ -111,7 +112,6 @@ public class ReportGenerator {
     }
     private void printFullResult(StudentData students, LocalDateTime dateTime) {
         getEndDate(students);
-        System.out.println("Full information:");
         System.out.println(students.getStudent() + "\n" + "From 10 to 18\n"
                 + students.getCurriculum() + "\n" + students.getDuration() + "\n"
                 + students.getDate().getDayOfMonth() + " "

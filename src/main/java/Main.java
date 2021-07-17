@@ -1,28 +1,21 @@
-import java.time.*;
+import com.griddynamics.qa.course.model.StudentData;
+import com.griddynamics.qa.course.service.InputScanner;
+
+import java.time.DayOfWeek;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.Month;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+
 public class Main {
     public static void main(String[] agrs) {
-        //Date from console
-        Scanner scDay = new Scanner(System.in);
-        System.out.println("Введите число:");
-        int dayOf = scDay.nextInt();
-        Scanner scMonth = new Scanner(System.in);
-        System.out.println("Введите номер месяца:");
-        int monthOf = scMonth.nextInt();
-        Scanner scYear = new Scanner(System.in);
-        System.out.println("Введите номер года:");
-        int yearOf = scYear.nextInt();
-        Scanner scHour = new Scanner(System.in);
-        System.out.println("Введите время:");
-        int hourOf = scHour.nextInt();
-        Scanner scAnswerType = new Scanner(System.in);
-        System.out.println("Введите 0 для краткого отчета:");
-        int answerType = scAnswerType.nextInt();
-        LocalDateTime fromConsole = LocalDateTime.of(yearOf, monthOf, dayOf, hourOf, 0);
-
-
+        //Input
+        InputScanner inputScanner = new InputScanner();
+        LocalDateTime dateTime = inputScanner.input();
+        int answerType = inputScanner.answerType();
 
         //Student data
         ArrayList<StudentData> students = new ArrayList<>();
@@ -33,22 +26,17 @@ public class Main {
         students.add(st);
         students.add(st2);
 
-
-
         //Print short answer
         if (answerType == 0) {
-            System.out.println("Short (Generating report date - " + fromConsole.getDayOfMonth()
-                    + " " + fromConsole.getMonth() + " " + fromConsole.getYear() + ", "
-                    + fromConsole.getDayOfWeek() + ", " + fromConsole.getHour() + ":00");
+            System.out.println("Short (Generating report date - " + dateTime.getDayOfMonth()
+                    + " " + dateTime.getMonth() + " " + dateTime.getYear() + ", "
+                    + dateTime.getDayOfWeek() + ", " + dateTime.getHour() + ":00");
             //For Array
             for (int i = 0; i < students.toArray().length; i++) {
-                //Difference between dates
-                Duration diff = Duration.between(LocalDateTime.from(students.get(i).getDate()), LocalDateTime.from(fromConsole));
-
                 //Loop full days difference between
                 int numberOfDays = 0;
                 LocalDateTime date1 = students.get(i).getDate();
-                LocalDateTime date2 = fromConsole;
+                LocalDateTime date2 = dateTime;
                 while (date1.isBefore(date2.minus(1, ChronoUnit.DAYS))) {
                     if (date1.getDayOfWeek() != (DayOfWeek.SATURDAY)
                             && (date1.getDayOfWeek() != (DayOfWeek.SUNDAY))) {
@@ -60,7 +48,7 @@ public class Main {
                 //Loop addhours difference between
                 int numberOfHours = 0;
                 LocalDateTime dateH1 = students.get(i).getDate();
-                LocalDateTime dateH2 = fromConsole;
+                LocalDateTime dateH2 = dateTime;
                 if (dateH2.getDayOfWeek() != DayOfWeek.SATURDAY && dateH2.getDayOfWeek() != DayOfWeek.SUNDAY
                         && dateH2.getHour() < 18) {
                     while (dateH1.getHour() < dateH2.getHour()) {
@@ -109,13 +97,10 @@ public class Main {
             System.out.println("Full information:");
             //For Array
             for (int i = 0; i < students.toArray().length; i++) {
-                //Difference between dates
-                Duration diff = Duration.between(LocalDateTime.from(students.get(i).getDate()), LocalDateTime.from(fromConsole));
-
                 //Loop full days difference between
                 int numberOfDays = 0;
                 LocalDateTime date1 = students.get(i).getDate();
-                LocalDateTime date2 = fromConsole;
+                LocalDateTime date2 = dateTime;
                 while (date1.isBefore(date2.minus(1, ChronoUnit.DAYS))) {
                     if (date1.getDayOfWeek() != (DayOfWeek.SATURDAY)
                             && (date1.getDayOfWeek() != (DayOfWeek.SUNDAY))) {
@@ -127,7 +112,7 @@ public class Main {
                 //Loop addhours difference between
                 int numberOfHours = 0;
                 LocalDateTime dateH1 = students.get(i).getDate();
-                LocalDateTime dateH2 = fromConsole;
+                LocalDateTime dateH2 = dateTime;
                 if (dateH2.getDayOfWeek() != DayOfWeek.SATURDAY && dateH2.getDayOfWeek() != DayOfWeek.SUNDAY
                         && (dateH2.getHour() < 18)) {
                     while (dateH1.getHour() < dateH2.getHour()) {

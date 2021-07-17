@@ -1,6 +1,6 @@
-import java.time.LocalDate;
+package com.griddynamics.qa.course.model;
+
 import java.time.LocalDateTime;
-import java.time.Month;
 
 public class StudentData {
     private String student;

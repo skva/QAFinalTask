@@ -18,13 +18,12 @@ public class InputScanner {
         System.out.println("Введите время:");
         int hourOf = scHour.nextInt();
 
-        LocalDateTime fromConsole = LocalDateTime.of(yearOf, monthOf, dayOf, hourOf, 0);
-        return fromConsole;
+        return LocalDateTime.of(yearOf, monthOf, dayOf, hourOf, 0);
     }
+
     public int answerType() {
         Scanner scAnswerType = new Scanner(System.in);
         System.out.println("Введите 0 для краткого отчета:");
-        int answerType = scAnswerType.nextInt();
-        return answerType;
+        return scAnswerType.nextInt();
     }
 }

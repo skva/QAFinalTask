@@ -8,17 +8,25 @@ import java.time.temporal.ChronoUnit;
 
 public class ReportGenerator {
     InputScanner inputScanner = new InputScanner();
-    LocalDateTime dateTime = inputScanner.input();
+    LocalDateTime dateTime;
 
-    public void shortReport(StudentData students) {
+    public ReportGenerator(InputScanner inputScanner) {
+        this.inputScanner = inputScanner;
+        this.dateTime = inputScanner.inputScanner();
+    }
+    //TestConstructor
+    public ReportGenerator() {
+    }
+
+    public void getShortReport(StudentData students) {
         printShortResult(students, dateTime);
     }
-    public void fullReport(StudentData students) {
+    public void getFullReport(StudentData students) {
         printFullResult(students, dateTime);
     }
 
     //Days difference between training start date and input date
-    private int getDaysDiff(StudentData students, LocalDateTime dateTime) {
+    public int getDaysDiff(StudentData students, LocalDateTime dateTime) {
         int numberOfDays = 0;
         LocalDateTime date = students.getDate();
         while (date.isBefore(dateTime.minus(1, ChronoUnit.DAYS))) {
@@ -31,9 +39,8 @@ public class ReportGenerator {
         return numberOfDays;
     }
     //Hours difference in last day
-    private int getHoursDiff(StudentData students, LocalDateTime dateTime) {
-        LocalDateTime date
-                = students.getDate();
+    public int getHoursDiff(StudentData students, LocalDateTime dateTime) {
+        LocalDateTime date = students.getDate();
         int numberOfHours = 0;
         if (dateTime.getDayOfWeek() != DayOfWeek.SATURDAY && dateTime.getDayOfWeek() != DayOfWeek.SUNDAY
                 && dateTime.getHour() < 18) {
@@ -51,7 +58,7 @@ public class ReportGenerator {
         return numberOfHours;
     }
     //Full hours difference
-    private int getAllHours(StudentData students, LocalDateTime dateTime) {
+    public int getAllHours(StudentData students, LocalDateTime dateTime) {
         return getDaysDiff(students, dateTime) * 8 + getHoursDiff(students, dateTime);
     }
 
@@ -94,11 +101,12 @@ public class ReportGenerator {
         }
         return endDate;
     }
-
-    private void printShortResult(StudentData students, LocalDateTime dateTime) {
+    public void printShortResultInfo() {
         System.out.println("Short (Generating report date - " + dateTime.getDayOfMonth()
                 + " " + dateTime.getMonth() + " " + dateTime.getYear() + ", "
                 + dateTime.getDayOfWeek() + ", " + dateTime.getHour() + ":00");
+    }
+    private void printShortResult(StudentData students, LocalDateTime dateTime) {
         if (students.getDuration() > getAllHours(students, dateTime)) {
             System.out.println(students.getStudent() + " (" + students.getCurriculum() + ")" +
                     " - Training is not finished. " + getAnswerDays(students, dateTime) + " d "

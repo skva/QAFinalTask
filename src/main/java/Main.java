@@ -4,7 +4,6 @@ import com.griddynamics.qa.course.service.ReportGenerator;
 
 import java.time.LocalDateTime;
 import java.time.Month;
-import java.util.ArrayList;
 
 
 public class Main {
@@ -14,15 +13,17 @@ public class Main {
         StudentData st2 = new StudentData("Sidorov Ivan", "J2EE Developer",
                 LocalDateTime.of(2020, Month.JUNE, 1, 10, 00), 42);
 
-        ReportGenerator printRep = new ReportGenerator();
+
         InputScanner inputScanner = new InputScanner();
-        if (inputScanner.answerType() == 0) {
-            printRep.shortReport(st);
-            printRep.shortReport(st2);
+        ReportGenerator printRep = new ReportGenerator(inputScanner);
+        if (inputScanner.inputAnswerType() == 0) {
+            printRep.printShortResultInfo();
+            printRep.getShortReport(st);
+            printRep.getShortReport(st2);
         } else {
             System.out.println("Full information:");
-            printRep.fullReport(st);
-            printRep.fullReport(st2);
+            printRep.getFullReport(st);
+            printRep.getFullReport(st2);
         }
     }
 }

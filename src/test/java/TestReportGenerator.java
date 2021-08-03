@@ -11,19 +11,18 @@ public class TestReportGenerator {
     ReportGenerator rep = new ReportGenerator();
     StudentData st = new StudentData("Ivanov Ivan", "Java Developer",
             LocalDateTime.of(2020, Month.JUNE, 1, 10, 00), 56);
-    LocalDateTime date = LocalDateTime.of(2020, 7, 7, 10, 00);
     LocalDateTime dateTime = LocalDateTime.of(2020, 8, 7, 17, 00);
     LocalDateTime endDateForTest = LocalDateTime.of(2020, 6, 9, 10, 00);
 
     @Test
     public void testGetAllHours() {
-        int hours = rep.getAllHours(st, date);
-        Assertions.assertEquals(200, hours);
+        int hours = rep.getAllHours(st, dateTime);
+        Assertions.assertEquals(399, hours);
     }
     @Test
     public void testDaysDiff() {
-        int numberOfDays = rep.getDaysDiff(st, date);
-        Assertions.assertEquals(25, numberOfDays);
+        int numberOfDays = rep.getDaysDiff(st, dateTime);
+        Assertions.assertEquals(49, numberOfDays);
     }
     @Test
     public void testHoursDiff() {

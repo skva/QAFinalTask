@@ -7,6 +7,7 @@ import java.time.Month;
 
 
 public class Main {
+
     public static void main(String[] agrs) {
         StudentData st = new StudentData("Ivanov Ivan", "Java Developer",
                 LocalDateTime.of(2020, Month.JUNE, 1, 10, 00), 56);
@@ -16,7 +17,7 @@ public class Main {
 
         InputScanner inputScanner = new InputScanner();
         ReportGenerator printRep = new ReportGenerator(inputScanner);
-        if (inputScanner.inputAnswerType() == 0) {
+        if (inputScanner.scanReportType() == 0) {
             printRep.printShortResultInfo();
             printRep.getShortReport(st);
             printRep.getShortReport(st2);

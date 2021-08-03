@@ -3,6 +3,7 @@ package com.griddynamics.qa.course.model;
 import java.time.LocalDateTime;
 
 public class StudentData {
+
     private String student;
     private String curriculum;
     private LocalDateTime date;

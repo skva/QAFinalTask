@@ -7,16 +7,25 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
 public class ReportGenerator {
-    InputScanner inputScanner = new InputScanner();
+
+    //InputScanner inputScanner = new InputScanner();
     LocalDateTime dateTime;
 
     public ReportGenerator(InputScanner inputScanner) {
-        this.inputScanner = inputScanner;
-        this.dateTime = inputScanner.inputScanner();
+        //this.inputScanner = inputScanner;
+        this.dateTime = inputScanner.scanDate();
     }
     //TestConstructor
     public ReportGenerator() {
+
     }
+
+//    //TestConstructor
+//    public ReportGenerator(LocalDateTime dateTime) {
+//        this.dateTime = dateTime;
+//    }
+
+
 
     public void getShortReport(StudentData students) {
         printShortResult(students, dateTime);
@@ -61,33 +70,13 @@ public class ReportGenerator {
     public int getAllHours(StudentData students, LocalDateTime dateTime) {
         return getDaysDiff(students, dateTime) * 8 + getHoursDiff(students, dateTime);
     }
-
     private int getAnswerDays(StudentData students, LocalDateTime dateTime) {
-        //Get answer difference
-        int answerDays = 0;
-        //Training is not finished
-        if (students.getDuration() > getAllHours(students, dateTime)) {
-            answerDays = (students.getDuration() - getAllHours(students, dateTime)) / 8;
-        }
-        //Training is finished
-        if (students.getDuration() < getAllHours(students, dateTime)) {
-            answerDays = (getAllHours(students, dateTime) - students.getDuration()) / 8;
-        }
-        return answerDays;
+        return Math.abs((students.getDuration() - getAllHours(students, dateTime))) / 8;
     }
     private int getAnswerHours(StudentData students, LocalDateTime dateTime) {
-        //Get answer difference
-        int answerHours = 0;
-        //Training is not finished
-        if (students.getDuration() > getAllHours(students, dateTime)) {
-            answerHours = (students.getDuration() - getAllHours(students, dateTime)) % 8;
-        }
-        //Training is finished
-        if (students.getDuration() < getAllHours(students, dateTime)) {
-            answerHours = (getAllHours(students, dateTime) - students.getDuration()) % 8;
-        }
-        return answerHours;
+        return Math.abs((students.getDuration() - getAllHours(students, dateTime))) % 8;
     }
+
     //Training end date
     private LocalDateTime getEndDate(StudentData students) {
         LocalDateTime endDate = students.getDate();

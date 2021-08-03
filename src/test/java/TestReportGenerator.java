@@ -9,6 +9,7 @@ import java.time.Month;
 import java.time.temporal.ChronoUnit;
 
 public class TestReportGenerator {
+
     StudentData st = new StudentData("Ivanov Ivan", "Java Developer",
             LocalDateTime.of(2020, Month.JUNE, 1, 10, 00), 56);
     LocalDateTime date = LocalDateTime.of(2020, 7, 7, 10, 00);

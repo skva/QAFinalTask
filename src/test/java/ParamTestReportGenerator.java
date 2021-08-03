@@ -43,8 +43,7 @@ public class ParamTestReportGenerator {
     }
 
     @Test
-    public void testAirthematicTest() {
-        System.out.println("Hello" + expectedResult);
+    public void testGetAllHoursWithParams() {
         Assertions.assertEquals(expectedResult, rep.getAllHours(st, date));
     }
 

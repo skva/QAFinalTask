@@ -8,16 +8,13 @@ import java.time.temporal.ChronoUnit;
 
 public class ReportGenerator {
 
-    //InputScanner inputScanner = new InputScanner();
     LocalDateTime dateTime;
 
     public ReportGenerator(InputScanner inputScanner) {
-        //this.inputScanner = inputScanner;
         this.dateTime = inputScanner.scanDate();
     }
     //TestConstructor
     public ReportGenerator() {
-
     }
 
 //    //TestConstructor
@@ -25,15 +22,12 @@ public class ReportGenerator {
 //        this.dateTime = dateTime;
 //    }
 
-
-
     public void getShortReport(StudentData students) {
         printShortResult(students, dateTime);
     }
     public void getFullReport(StudentData students) {
         printFullResult(students, dateTime);
     }
-
     //Days difference between training start date and input date
     public int getDaysDiff(StudentData students, LocalDateTime dateTime) {
         int numberOfDays = 0;
@@ -70,15 +64,14 @@ public class ReportGenerator {
     public int getAllHours(StudentData students, LocalDateTime dateTime) {
         return getDaysDiff(students, dateTime) * 8 + getHoursDiff(students, dateTime);
     }
-    private int getAnswerDays(StudentData students, LocalDateTime dateTime) {
+    public int getAnswerDays(StudentData students, LocalDateTime dateTime) {
         return Math.abs((students.getDuration() - getAllHours(students, dateTime))) / 8;
     }
-    private int getAnswerHours(StudentData students, LocalDateTime dateTime) {
+    public int getAnswerHours(StudentData students, LocalDateTime dateTime) {
         return Math.abs((students.getDuration() - getAllHours(students, dateTime))) % 8;
     }
-
     //Training end date
-    private LocalDateTime getEndDate(StudentData students) {
+    public LocalDateTime getEndDate(StudentData students) {
         LocalDateTime endDate = students.getDate();
         //Count training end date except SA/SU
         for (int j = students.getDuration()/8; j > 0; j--) {

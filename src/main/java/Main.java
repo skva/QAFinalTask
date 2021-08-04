@@ -5,7 +5,6 @@ import com.griddynamics.qa.course.service.ReportGenerator;
 import java.time.LocalDateTime;
 import java.time.Month;
 
-
 public class Main {
 
     public static void main(String[] agrs) {
@@ -17,14 +16,18 @@ public class Main {
 
         InputScanner inputScanner = new InputScanner();
         ReportGenerator printRep = new ReportGenerator(inputScanner);
-        if (inputScanner.scanReportType() == 0) {
-            printRep.printShortResultInfo();
-            printRep.getShortReport(st);
-            printRep.getShortReport(st2);
-        } else {
-            System.out.println("Full information:");
-            printRep.getFullReport(st);
-            printRep.getFullReport(st2);
+        if (inputScanner.consoleDate.isAfter(st.getDate())) {
+            if (inputScanner.scanReportType() == 0) {
+                printRep.printShortResultInfo();
+                printRep.getShortReport(st);
+                printRep.getShortReport(st2);
+            } else {
+                System.out.println("Full information:");
+                printRep.getFullReport(st);
+                printRep.getFullReport(st2);
+            }
+        } if (inputScanner.consoleDate.isBefore(st.getDate())) {
+            System.out.println("Please input date greater 1 JUNE 2020");
         }
     }
 }

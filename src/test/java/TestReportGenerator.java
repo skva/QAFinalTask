@@ -14,11 +14,18 @@ public class TestReportGenerator {
     LocalDateTime dateTime = LocalDateTime.of(2020, 8, 7, 17, 00);
     LocalDateTime endDateForTest = LocalDateTime.of(2020, 6, 9, 10, 00);
 
+    LocalDateTime beforeDate = LocalDateTime.of(2019, 6, 9, 10, 00);
+
     @Test
     public void testGetAllHours() {
         int hours = rep.getAllHours(st, dateTime);
         Assertions.assertEquals(399, hours);
     }
+//    @Test
+//    public void testGetAllHoursWithBeforeDate() {
+//        int hours = rep.getAllHours(st, beforeDate);
+//        Assertions.assertEquals(1, hours, "before start date");
+//    }
     @Test
     public void testDaysDiff() {
         int numberOfDays = rep.getDaysDiff(st, dateTime);

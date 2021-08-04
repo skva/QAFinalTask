@@ -5,8 +5,7 @@ import java.util.Scanner;
 
 public class InputScanner {
 
-
-
+    public LocalDateTime consoleDate;
     public LocalDateTime scanDate() {
         Scanner scDay = new Scanner(System.in);
         System.out.println("Введите число:");
@@ -21,9 +20,9 @@ public class InputScanner {
         System.out.println("Введите время:");
         int hourOf = scHour.nextInt();
 
-        return LocalDateTime.of(yearOf, monthOf, dayOf, hourOf, 0);
+        consoleDate = LocalDateTime.of(yearOf, monthOf, dayOf, hourOf, 0);
+        return consoleDate;
     }
-
     public int scanReportType() {
         Scanner scAnswerType = new Scanner(System.in);
         System.out.println("Введите 0 для краткого отчета:");

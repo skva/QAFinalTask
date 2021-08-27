@@ -1,0 +1,2 @@
+# QAFinalTask
+Simple Training Calculator
